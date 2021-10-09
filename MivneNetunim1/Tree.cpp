@@ -1,11 +1,25 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include"Tree.h"
 #include"Node.h"
 #include"Answer.h"
 #include<conio.h>
 using namespace std;
 Node* Tree::search(Node* p, string val, Node*& parent)
-{
+{	
 	return nullptr;
+}
+
+bool Tree::searchAndPrint(Node* p, string val)
+{
+	return false;
+}
+
+void Tree::print(Node* p, int level)
+{
+}
+
+void Tree::process(Node* p)
+{
 }
 
 Node* Tree::searchQuestion(string question, Node* ptr)
@@ -20,6 +34,10 @@ Node* Tree::searchQuestion(string question, Node* ptr)
 		}
 	}
 	return nullptr;//if the question is not in the tree
+}
+
+void Tree::deleteAllSubTree(Node* t)
+{
 }
 
 void Tree::addRoot(string newval)
@@ -38,4 +56,13 @@ bool Tree::addSon(string fatherquestion, string newanswer, string newval)
 		return true;
 	}
 	return false;
+}
+
+string Tree::printToString(Node* p)
+{
+	return string();
+}
+
+void Tree::deleteSubTree(string val)
+{
 }
