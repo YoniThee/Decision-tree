@@ -42,7 +42,7 @@ void Tree::deleteAllSubTree(Node* t)
 
 void Tree::addRoot(string newval)
 {
-	root->value = newval;//now the root is have value - the string
+	root = new Node(newval);//now the root is have value - the string
 }
 
 bool Tree::addSon(string fatherquestion, string newanswer, string newval)
