@@ -10,8 +10,17 @@ Node* Tree::search(Node* p, string val, Node*& parent)
 }
 
 bool Tree::searchAndPrint(Node* p, string val)
-{
-	return false;
+{//למה זה בוליאני??
+	if (p->value == val) {
+		return true;
+	}
+	else {//scan all the sons for search "val"
+		list<Answer*>::iterator iter = p->answersList.begin();
+		for (int counter = 0;counter <p->answersList.size();counter++) {
+
+			iter++;
+		}
+	}
 }
 
 void Tree::print(Node* p, int level)
@@ -28,9 +37,10 @@ Node* Tree::searchQuestion(string question, Node* ptr)
 		return ptr;
 	else {
 		list<Answer*>::iterator iter = ptr->answersList.begin();//
-		for (; iter != ptr->answersList.end(); iter++) {//check all the sons of this father and search the question
+		for (int counter = 0; counter < ptr->answersList.size(); counter++) {//check all the sons of this father and search the question
 			Answer *temp = *iter;
 			searchQuestion(question, temp->son);
+			iter++;
 		}
 	}
 	return nullptr;//if the question is not in the tree
@@ -72,9 +82,10 @@ void Tree::deleteSubTree(string val)
 		delete tempPtr;
 	else {
 		list<Answer*>::iterator iter = tempPtr->answersList.begin();
-		for (; iter != tempPtr->answersList.end(); iter++) {//check all the sons and remove them
+		for (int counter = 0; counter < tempPtr->answersList.size(); counter++) {//check all the sons and remove them
 			Answer* temp = *iter;
 			deleteSubTree(temp->ans);//reqursive delete
+			iter++;
 		}
 	}
 

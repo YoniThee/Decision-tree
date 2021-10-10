@@ -8,7 +8,7 @@ class Node
 	void removeSonValue(string v);
 public:
 	list<Answer*> answersList;
-	std::string value;
+	string value;
 	bool isLeaf;
 	Node(string v) { isLeaf = true;  value = v; }
 	Node() { }
