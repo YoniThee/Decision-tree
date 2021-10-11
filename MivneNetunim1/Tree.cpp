@@ -16,6 +16,16 @@ bool Tree::searchAndPrint(Node* p, string val)
 
 void Tree::print(Node* p, int level)
 {
+/*
+	cout << p->value;
+	if (p->answersList)
+	{
+		
+	}
+	Node* tempPtr = p;
+	list<Answer*>::iterator iter = tempPtr->answersList.begin();
+	*/
+
 }
 
 void Tree::process(Node* p)
@@ -67,6 +77,8 @@ void Tree::deleteSubTree(string val)
 {//מה שעשיתי פה זה שקיבלתי מצביע לצומת הרצויה, 
 //אם אין לו בנים אחלה סיימנו, אם יש לו בנים אז אני רץ עם איטרטור על כל הבנים שלו ושולח אותם לאותו סינון  בדיוק ברקורסיה
 //מה שגורם לי בסוף למחיקה של כל העץ - מחכה שתאשר לי
+
+	//מטורף ש'ך :)
 	Node* tempPtr = searchQuestion(val,root);//find the node that have the string "val"
 	if (tempPtr->isLeaf) //if the node is no have sons
 		delete tempPtr;
