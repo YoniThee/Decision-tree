@@ -36,17 +36,21 @@ bool Tree::searchAndPrint(Node* p, string val)
 
 void Tree::print(Node* p, int level)
 {
-	for (int i = 0; i < level; i++){
-		cout << "\t";
-	}
+	
 		cout << p->value << endl;
 		list<Answer*>::iterator iter = p->answersList.begin();
 		for (int counter = 0; counter < p->answersList.size(); counter++) {
 			Answer* temp = *iter;
 			if (!p->isLeaf) {
-				cout  << temp->ans << " :" << endl << "\t";
-				print(temp->son,level++);
+				for (int j = 0; j < level; j++)
+					cout << "\t";
+				cout << temp->ans << " :" << endl;
+				for(int i =0;i<level+1;i++)
+					cout<< "\t";
+				level++;
+				print(temp->son,level);
 			}
+			level = 0;
 			iter++;
 		}
 }
@@ -66,7 +70,7 @@ Node* Tree::searchQuestion(string question, Node* ptr)
 		for (int counter = 0; counter < ptr->answersList.size(); counter++) {//check all the sons of this father and search the question
 			Answer* temp = *iter;
 			if(!searchQuestion(question, temp->son))//if the question is not in the tree continune scan the tree 
-			iter++;
+				iter++;
 			else //we fount the node
 				return temp->son;
 		}
@@ -102,23 +106,18 @@ string Tree::printToString(Node* p)
 }
 
 void Tree::deleteSubTree(string val)
-{//מה שעשיתי פה זה שקיבלתי מצביע לצומת הרצויה, 
-//אם אין לו בנים אחלה סיימנו, אם יש לו בנים אז אני רץ עם איטרטור על כל הבנים שלו ושולח אותם לאותו סינון  בדיוק ברקורסיה
-//מה שגורם לי בסוף למחיקה של כל העץ - מחכה שתאשר לי
-
-	//מטורף ש'ך :)
+{
 	Node* tempPtr = searchQuestion(val, root);//find the node that have the string "val"
-	if (tempPtr->isLeaf) //if the node is no have sons
-		delete tempPtr;
-	else {
-		list<Answer*>::iterator iter = tempPtr->answersList.begin();
-		for (int counter = 0; counter < tempPtr->answersList.size(); counter++) {//check all the sons and remove them
-			Answer* temp = *iter;
-			deleteSubTree(temp->ans);//reqursive delete
-			iter++;
+	if (tempPtr) {//if the question is in the tree
+		if (tempPtr->isLeaf) //if the node is no have sons
+			delete tempPtr;
+		else {
+			list<Answer*>::iterator iter = tempPtr->answersList.begin();
+			for (int counter = 0; counter < tempPtr->answersList.size(); counter++) {//check all the sons and remove them
+				Answer* temp = *iter;
+				deleteSubTree(temp->son->value);//reqursive delete
+				iter++;
+			}
 		}
 	}
-
-
-
 }
