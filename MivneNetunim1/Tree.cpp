@@ -36,29 +36,19 @@ bool Tree::searchAndPrint(Node* p, string val)
 
 void Tree::print(Node* p, int level)
 {
-	//if (p->isLeaf)
-	{
-		//cout << p->value << endl;
+	for (int i = 0; i < level; i++){
+		cout << "\t";
 	}
-	//else
-	{
 		cout << p->value << endl;
 		list<Answer*>::iterator iter = p->answersList.begin();
 		for (int counter = 0; counter < p->answersList.size(); counter++) {
 			Answer* temp = *iter;
 			if (!p->isLeaf) {
-				cout << ": " << temp->ans << endl << "\t";
-				//cout << "\t";// << temp->son->value;
-				print(temp->son);
-				//if (!temp->son->isLeaf)
-			}	iter++;
+				cout  << temp->ans << " :" << endl << "\t";
+				print(temp->son,level++);
+			}
+			iter++;
 		}
-	}
-				
-	
-	
-
-
 }
 
 void Tree::process(Node* p)
@@ -73,8 +63,10 @@ Node* Tree::searchQuestion(string question, Node* ptr)
 		list<Answer*>::iterator iter = ptr->answersList.begin();//
 		for (int counter = 0; counter < ptr->answersList.size(); counter++) {//check all the sons of this father and search the question
 			Answer* temp = *iter;
-			searchQuestion(question, temp->son);
+			if(!searchQuestion(question, temp->son))//if the question is not in the tree continune scan the tree 
 			iter++;
+			else //we fount the node
+				return temp->son;
 		}
 	}
 	return nullptr;//if the question is not in the tree
