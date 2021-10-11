@@ -5,35 +5,59 @@
 #include<conio.h>
 using namespace std;
 Node* Tree::search(Node* p, string val, Node*& parent)
-{	
+{
 	return nullptr;
 }
 
 bool Tree::searchAndPrint(Node* p, string val)
-{//למה זה בוליאני??
+{
+	/*//למה זה בוליאני??
+	//זה לא הפונ הדפסה שרוצים ב-p
+	//זה מגיע לפונ בשורה 28
 	if (p->value == val) {
 		return true;
 	}
 	else {//scan all the sons for search "val"
 		list<Answer*>::iterator iter = p->answersList.begin();
-		for (int counter = 0;counter <p->answersList.size();counter++) {
+		for (int counter = 0; counter < p->answersList.size(); counter++) {
 
 			iter++;
 		}
+	}*/
+	if (searchQuestion(val,p))//if the question is in the tree
+	{
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 
 void Tree::print(Node* p, int level)
 {
-/*
-	cout << p->value;
-	if (p->answersList)
+	//if (p->isLeaf)
 	{
-		
+		//cout << p->value << endl;
 	}
-	Node* tempPtr = p;
-	list<Answer*>::iterator iter = tempPtr->answersList.begin();
-	*/
+	//else
+	{
+		cout << p->value << endl;
+		list<Answer*>::iterator iter = p->answersList.begin();
+		for (int counter = 0; counter < p->answersList.size(); counter++) {
+			Answer* temp = *iter;
+			if (!p->isLeaf) {
+				cout << ": " << temp->ans << endl << "\t";
+				//cout << "\t";// << temp->son->value;
+				print(temp->son);
+				//if (!temp->son->isLeaf)
+			}	iter++;
+		}
+	}
+				
+	
+	
+
 
 }
 
@@ -48,7 +72,7 @@ Node* Tree::searchQuestion(string question, Node* ptr)
 	else {
 		list<Answer*>::iterator iter = ptr->answersList.begin();//
 		for (int counter = 0; counter < ptr->answersList.size(); counter++) {//check all the sons of this father and search the question
-			Answer *temp = *iter;
+			Answer* temp = *iter;
 			searchQuestion(question, temp->son);
 			iter++;
 		}
@@ -67,7 +91,7 @@ void Tree::addRoot(string newval)
 
 bool Tree::addSon(string fatherquestion, string newanswer, string newval)
 {
-	Node* rootPtr = searchQuestion(fatherquestion,root);
+	Node* rootPtr = searchQuestion(fatherquestion, root);
 	if (rootPtr != NULL) {//if the question is in the tree
 		rootPtr->isLeaf = false; //now this root is have a son so he is not a leaf
 		Node* possiboleAns = new Node(newval); //if the next level in the tree is answer and no more leaf
@@ -89,7 +113,7 @@ void Tree::deleteSubTree(string val)
 //מה שגורם לי בסוף למחיקה של כל העץ - מחכה שתאשר לי
 
 	//מטורף ש'ך :)
-	Node* tempPtr = searchQuestion(val,root);//find the node that have the string "val"
+	Node* tempPtr = searchQuestion(val, root);//find the node that have the string "val"
 	if (tempPtr->isLeaf) //if the node is no have sons
 		delete tempPtr;
 	else {
