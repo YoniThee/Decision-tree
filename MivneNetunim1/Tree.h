@@ -27,9 +27,10 @@ public:
 	bool addSon(string fatherquestion, string newanswer, string newval);
 	void searchAndPrint(string val)
 	{
-		if (!searchAndPrint(root, val))//if the string is not in the tree
+		if (!searchQuestion(val,root))//if the string is not in the tree
 			cout << "Value not found" << endl;
-		else {//print the string up to last the tree
+		else {//print the path from the leaf up to the root
+			process(searchQuestion(val, root));
 
 		}
 	}

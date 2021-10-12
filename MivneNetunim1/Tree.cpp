@@ -59,6 +59,12 @@ void Tree::print(Node* p, int level)
 
 void Tree::process(Node* p)
 {
+	if (p != root)
+		cout << p->value << "=>";
+	else {
+		Node * temp = searchQuestion()
+	}
+		
 }
 
 Node* Tree::searchQuestion(string question, Node* ptr)
@@ -71,7 +77,7 @@ Node* Tree::searchQuestion(string question, Node* ptr)
 			Answer* temp = *iter;
 			if(!searchQuestion(question, temp->son))//if the question is not in the tree continune scan the tree 
 				iter++;
-			else //we fount the node
+			else //we found the node
 				return temp->son;
 		}
 	}
