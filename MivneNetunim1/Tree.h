@@ -5,6 +5,9 @@
 #include"Node.h"
 #include"Answer.h"
 using namespace std;
+
+
+
 //Tree: the Decision Tree
 class Tree
 {
@@ -48,18 +51,11 @@ public:
 					else
 					{
 						y.root= temp->son;
-						y.searchAndPrint(val);
-						
-						process(y.root);
-					}
-
-
+						y.searchAndPrint(val);						
+					}					
 				}
 			}
-
-
 		}
-
 		/*
 		n
 		me
@@ -76,6 +72,7 @@ public:
 		e
 		f
 		*/
+	process(root);
 	}
 
 
