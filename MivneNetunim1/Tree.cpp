@@ -11,19 +11,6 @@ Node* Tree::search(Node* p, string val, Node*& parent)
 
 bool Tree::searchAndPrint(Node* p, string val)
 {
-	/*//למה זה בוליאני??
-	//זה לא הפונ הדפסה שרוצים ב-p
-	//זה מגיע לפונ בשורה 28
-	if (p->value == val) {
-		return true;
-	}
-	else {//scan all the sons for search "val"
-		list<Answer*>::iterator iter = p->answersList.begin();
-		for (int counter = 0; counter < p->answersList.size(); counter++) {
-
-			iter++;
-		}
-	}*/
 	if (searchQuestion(val,p))//if the question is in the tree
 	{
 		return true;
@@ -77,17 +64,20 @@ void Tree::process(Node* p)
 
 Node* Tree::searchQuestion(string question, Node* ptr)
 {
+	
 	if (!(ptr->value.compare(question)))//if we found the question
 		return ptr;
 	else {
 		list<Answer*>::iterator iter = ptr->answersList.begin();//
 		for (int counter = 0; counter < ptr->answersList.size(); counter++) {//check all the sons of this father and search the question
 			Answer* temp = *iter;
-			if(!searchQuestion(question, temp->son))//if the question is not in the tree continune scan the tree 
-				iter++;
+			Node* test = searchQuestion(question, temp->son);//if the question is not in the tree continune scan the tree 
+				if(test == nullptr)
+					iter++;
 			else //we found the node
-				return temp->son;
+				return test;
 		}
+
 	}
 	return nullptr;//if the question is not in the tree
 }
@@ -107,8 +97,8 @@ bool Tree::addSon(string fatherquestion, string newanswer, string newval)
 	if (rootPtr != NULL) {//if the question is in the tree
 		rootPtr->isLeaf = false; //now this root is have a son so he is not a leaf
 		Node* possiboleAns = new Node(newval); //if the next level in the tree is answer and no more leaf
-		Answer* posiboleQue = new Answer(newanswer, possiboleAns);//if the user input is new levl in the tree create a new Answer type
-		rootPtr->answersList.push_back(posiboleQue);//the user input is in the list of posiibole answer of the root
+		Answer* possiboleQue = new Answer(newanswer, possiboleAns);//if the user input is new levl in the tree create a new Answer type
+		rootPtr->answersList.push_back(possiboleQue);//the user input is in the list of posiibole answer of the root
 		return true;
 	}
 	return false;
