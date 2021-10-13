@@ -27,13 +27,58 @@ public:
 	bool addSon(string fatherquestion, string newanswer, string newval);
 	void searchAndPrint(string val)
 	{
-		if (!searchQuestion(val,root))//if the string is not in the tree
+		if (!searchQuestion(val, root))//if the string is not in the tree
 			cout << "Value not found" << endl;
 		else {//print the path from the leaf up to the root
-			process(searchQuestion(val, root));
+	
+			Tree y;
+			
+
+
+			list<Answer*>::iterator iter = root->answersList.begin();//
+			for (int counter = 0; counter < root->answersList.size(); counter++)
+			{
+				Answer* temp = *iter;
+				if (searchAndPrint( temp->son,val))
+				{
+					if ( temp->son->value == val)
+					{
+						cout << temp->son->value ;
+					}
+					else
+					{
+						y.root= temp->son;
+						y.searchAndPrint(val);
+						
+						process(y.root);
+					}
+
+
+				}
+			}
+
 
 		}
+
+		/*
+		n
+		me
+		s
+		me
+		a
+		b
+		s
+		b
+		c
+		d
+		s
+		d
+		e
+		f
+		*/
 	}
+
+
 	void searchAndPrintArea(string val)
 	{
 		Node* parent;

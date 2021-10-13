@@ -45,21 +45,9 @@ void Tree::print(Node* p, int level)
 
 void Tree::process(Node* p)
 {
-	//this function need to print all the sons that they are question, and the answer and desition of them
-	list<Answer*>::iterator iter = p->answersList.begin();
-	for (int i = 0; i < p->answersList.size(); i++) {
-		cout << p->value << endl;;
-		Answer* temp = *iter;
-		if (!temp->son->isLeaf) {//if they have more desition in this tree
-			cout << temp->ans << endl;
-			process(temp->son);
-		}
-		else {
-			cout << temp->ans << endl;
-			cout << temp->son->value << endl;
-			break;
-		}
-	}
+	
+
+	cout << "=>"<< p->value ;
 }
 
 Node* Tree::searchQuestion(string question, Node* ptr)
