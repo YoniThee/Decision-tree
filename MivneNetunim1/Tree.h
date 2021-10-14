@@ -1,3 +1,4 @@
+//Shay Dopelt 208737981 && yehonatan Thee 209016393
 #pragma once
 #include <iostream>
 #include <list>
@@ -12,7 +13,7 @@ using namespace std;
 class Tree
 {
 	Node* root;
-	Node* search(Node* p, string val, Node*& );
+	Node* search(Node* p, string val, Node*&);
 	//returns node t where the string equals val. If t has a prent, the pointer parent will contain its address. 
 
 	bool searchAndPrint(Node* p, string val);
@@ -21,38 +22,39 @@ class Tree
 public:
 	Tree() { root = NULL; }
 	~Tree() {
-		deleteAllSubTree(root);
+		//deleteAllSubTree(root);
 		root = 0;
 	}
 	Node* searchQuestion(string father, Node* ptr);//this function find the root that have the father we search
 	void deleteAllSubTree(Node* t);
 	void addRoot(string newval);
 	bool addSon(string fatherquestion, string newanswer, string newval);
+	void path(Node* p);
 	void searchAndPrint(string val)
 	{
 		if (!searchQuestion(val, root))//if the string is not in the tree
 			cout << "Value not found" << endl;
 		else {//print the path from the leaf up to the root
-	
+
 			Tree y;
-			
+
 
 
 			list<Answer*>::iterator iter = root->answersList.begin();//
 			for (int counter = 0; counter < root->answersList.size(); counter++)
 			{
 				Answer* temp = *iter;
-				if (searchAndPrint( temp->son,val))
+				if (searchAndPrint(temp->son, val))
 				{
-					if ( temp->son->value == val)
+					if (temp->son->value == val)
 					{
-						cout << temp->son->value ;
+						cout << temp->son->value;
 					}
 					else
 					{
-						y.root= temp->son;
-						y.searchAndPrint(val);						
-					}					
+						y.root = temp->son;
+						y.searchAndPrint(val);
+					}
 				}
 			}
 		}
@@ -72,7 +74,7 @@ public:
 		e
 		f
 		*/
-	process(root);
+		path(root);
 	}
 
 
@@ -87,5 +89,5 @@ public:
 	string printToString() { return printToString(root); }
 	void deleteSubTree(string val);
 	void process() { process(root); }
+	
 };
-

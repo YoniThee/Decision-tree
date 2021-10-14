@@ -1,9 +1,9 @@
+//Shay Dopelt 208737981 && yehonatan Thee 209016393
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <list>
 #include <string>
 #include "Tree.h"
-
 
 using namespace std;
 int main()
